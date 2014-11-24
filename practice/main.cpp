@@ -1,6 +1,8 @@
 #include <iostream>
 #include "tree.h"
 #include "graph.h"
+#include "stack.h"
+#include "queue.h"
 
 void test_tree() {
 	TreeNode *tree = (TreeNode*)malloc(sizeof(TreeNode));
@@ -24,7 +26,7 @@ void test_tree() {
 	free_tree(tree);
 }
 
-int main(void) {
+void test_graph() {
 	Graph graph;
 	init_graph(&graph, DIRECTED);
 	add_verts(&graph, 6);
@@ -38,6 +40,43 @@ int main(void) {
 	std::cout << "Number of vertices: " << graph.nvertices << std::endl;
 	std::cout << "Number of edges: " << graph.nedges << std::endl;
 	std::cout << "Route from 0 to 5? " << (is_route(&graph, 2, 5) == true ? "yes" : "no") << std::endl;
+}
+
+void test_stack() {
+	Stack stack;
+	init_stack(&stack);
+	for (int i = 0; i < 10; i++) {
+		push(&stack, i);
+	}
+
+	std::cout << "min: " << stack_min(&stack) << std::endl;
+
+	for (int i = 0; i < 10; i++) {
+		std::cout << pop(&stack) << " ";
+	}
+
+	free_stack(&stack);
+}
+
+void test_queue() {
+	Queue q;
+	init_queue(&q);
+	for (int i = 0; i < 10; i++) {
+		enqueue(&q, i);
+	}
+
+	std::cout << "size: " << q.size << std::endl;
+
+	for (int i = 0; i < 10; i++) {
+		std::cout << dequeue(&q) << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "size: " << q.size << std::endl;
+	free_queue(&q);
+}
+
+int main(void) {
+	test_queue();
 
 	return 0;
 }
